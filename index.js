@@ -1,6 +1,6 @@
 /*------------BOILER PLATE--------------------*/
-const { exit } = require('process');
-const readline = require('readline');
+const { exit } = require("process");
+const readline = require("readline");
 const rl = readline.createInterface(process.stdin, process.stdout);
 
 function ask(questionText) {
@@ -9,44 +9,55 @@ function ask(questionText) {
   });
 }
 /*------------------GLOBAL VARIABLES----*/
-let min = 0; 
-let max = 100; 
+let min = 0;
+let max = 100;
 
 function randomInt(min, max) {
-  let range = max - min +1; 
-  return min +
-  Math.floor(Math.random() *range);
+  let range = max - min + 1;
+  return min + Math.floor(Math.random() * range);
 }
+function smartRobo(min, max) {
+  return Math.floor((min + max) / 2)
 
+}
 start();
 
 async function start() {
-  console.log("Let's play a game where you (human) make up a number and I (computer) try to guess it.")
-  let secretNumber = await ask("What is your secret number?\nI won't peek, I promise...\n");
-  console.log('You entered: ' + secretNumber);
+  console.log(
+    "Let's play a game where you (human) make up a number and I (computer) try to guess it."
+  );
+  let secretNumber = await ask(
+    "What is your secret number?\nI won't peek, I promise...\n"
+  );
+  console.log("You entered: " + secretNumber);
 
-  let roboGuess = randomInt(min, max);
-  let sassyRobo = await ask ('I think ur number is '+ roboGuess + "? (y or n)")
-  let success = "WOO HOO. rOb0t$ 4 the W1n!!"
+  let roboGuess = smartRobo(min, max);
+  let sassyRobo = await ask("I think ur number is " + roboGuess + "? (y or n)");
+  let success = "WOO HOO. rOb0t$ 4 the W1n!!";
   if (sassyRobo === "y") {
     process.exit();
   } else {
-    while (sassyRobo !== "y"){
-      let hiLow = await ask("Is it higher or lower? ")
-      console.log(hiLow)
-      if (hiLow === "h"){
-        min = roboGuess;
+    while (sassyRobo !== "y") {
+      let hiLow = await ask("Is it higher or lower? ");
+      console.log(hiLow);
+      if (hiLow === "h") {
+        min = roboGuess + 1;
         roboGuess = randomInt(min, max);
-        sassyRobo = await ask ('I think ur number is ' + roboGuess + "? (y or n)");
-        
-
-      } else { (hiLow !== "h") 
-        max = roboGuess;
+        sassyRobo = await ask(
+          "I think ur number is " + roboGuess + "? (y or n)"
+        );
+      } else if (hiLow === "l") {
+        max = roboGuess - 1;
         roboGuess = randomInt(min, max);
-        sassyRobo = await ask('I think ur number is ' + roboGuess + "? (y or n)");
+        sassyRobo = await ask(
+          "I think ur number is " + roboGuess + "? (y or n)"
+        );
+      } else {
+        answer = await ask("Is your number " + roboGuess + "?");
       }
     }
+    console.log(success);
+    
   }
-  console.log(success);
-  exit();
+
 }
