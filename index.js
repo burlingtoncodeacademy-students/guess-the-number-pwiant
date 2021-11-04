@@ -27,9 +27,9 @@ async function start() {
 
   let roboGuess = randomInt(min, max);
   let sassyRobo = await ask ('I think ur number is '+ roboGuess + "? (y or n)")
+  let success = "WOO HOO. rOb0t$ 4 the W1n!!"
   if (sassyRobo === "y") {
-      console.log("WOO! ROBO WIn.");
-    exit();
+    process.exit();
   } else {
     while (sassyRobo !== "y"){
       let hiLow = await ask("Is it higher or lower? ")
@@ -47,4 +47,6 @@ async function start() {
       }
     }
   }
+  console.log(success);
+  exit();
 }
