@@ -1,4 +1,5 @@
 /*------------BOILER PLATE--------------------*/
+const { exit } = require('process');
 const readline = require('readline');
 const rl = readline.createInterface(process.stdin, process.stdout);
 
@@ -27,8 +28,8 @@ async function start() {
   let roboGuess = randomInt(min, max);
   let sassyRobo = await ask ('I think ur number is '+ roboGuess + "? (y or n)")
   if (sassyRobo === "y") {
-      console.log("OH YEAH. ROBOTS WIN AGAIN");
-      process.exit()
+      console.log("WOO! ROBO WIn.");
+    exit();
   } else {
     while (sassyRobo !== "y"){
       let hiLow = await ask("Is it higher or lower? ")
