@@ -26,6 +26,9 @@ async function start() {
   console.log(
     "Let's play a game where you (human) make up a number and I (computer) try to guess it."
   );
+  max = await ask(
+    "First, let's set the range. \nWhat is the highest number you would like me to include in this game?"
+  )
   let secretNumber = await ask(
     "What is your secret number?\nI won't peek, I promise...\n"
   );
@@ -34,6 +37,8 @@ async function start() {
   let roboGuess = smartRobo(min, max);
   let sassyRobo = await ask("I think ur number is " + roboGuess + "? (y or n)");
   let success = "WOO HOO. rOb0t$ 4 the W1n!!";
+  let tries = 0; 
+  
   if (sassyRobo === "y") {
     process.exit();
   } else {
@@ -44,20 +49,35 @@ async function start() {
         min = roboGuess + 1;
         roboGuess = randomInt(min, max);
         sassyRobo = await ask(
-          "I think ur number is " + roboGuess + "? (y or n)"
-        );
+          "I think ur number is " + roboGuess + "? (y or n)")
+          if (tries >= 7){
+            console.log("Oh man, humans win again :'(")
+            process.exit()
+          }
+          tries++;
+        ;
       } else if (hiLow === "l") {
         max = roboGuess - 1;
         roboGuess = randomInt(min, max);
         sassyRobo = await ask(
           "I think ur number is " + roboGuess + "? (y or n)"
         );
+        if (tries >= 7){
+          console.log("Oh man, humans win again :'(")
+          process.exit()
+        }
+        tries++;
       } else {
         answer = await ask("Is your number " + roboGuess + "?");
+        tries++;
+        if (tries >= 7){
+          console.log("Oh man, humans win again :'(")
+          process.exit()
+        }
       }
     }
     console.log(success);
-    
+ 
   }
 
 }
