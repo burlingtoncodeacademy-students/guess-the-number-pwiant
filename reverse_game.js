@@ -11,8 +11,6 @@ function ask(questionText) {
   });
 }
 /*GLOBAL VARIABLES*/
-let min = 0;
-let max = 50;
 let tries = 0;
 
 //FUNCTION TO GENERATE RANDOM INT, BASED ON RANGE//
@@ -20,14 +18,14 @@ function randomInt(min, max) {
   let range = max - min + 1;
   return min + Math.floor(Math.random() * range);
 }
-
+//Reverse Game async function//
 newGame();
 async function newGame() {
   console.log(
     "Let's play a game where I (strong Robot) think of a number and you (puny human) try to guess it."
   );
   console.log(
-    "Because humans are weak, I'll try to make it easy for you. \nThe number I think of will be between ZERO and FIFTY."
+    "Because humans are weak, I'll try to make it easy for you. \nThe number I think of will be between ONE and FIFTY."
   );
   let wannaPlay = await ask(
     "Are you sure you want to play? I may crush your frail human ego.\n(yes or no)"
@@ -41,7 +39,7 @@ async function newGame() {
     console.log("YOU ARE NOT WORTHY.\nGOOD- \nBYE.");
     process.exit();
   }
-  let robitNum = randomInt(min, max);
+  let robitNum = randomInt(1, 50);
   console.log(".....\nCALCULATING.....\nCALCULATING...");
   console.log("OK! I'm ready now.");
   let humanGuess = await ask("What number am I thinking of?");
