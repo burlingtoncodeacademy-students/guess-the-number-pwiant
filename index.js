@@ -96,5 +96,3 @@ async function start() {
     playAgain();
   }
 }
-
-
