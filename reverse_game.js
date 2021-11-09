@@ -52,8 +52,8 @@ async function newGame() {
     console.log(
       "Oh man...\nTimes are tough out here for a gambling man...\nI bet all my bitcoins that you, a puny human couldn't beat me in a game of guessing numbers,\nbut somehow you did :("
     );
-    tries ++; 
-    console.log("And it only took you "+ tries +" tries...")
+    tries++;
+    console.log("And it only took you " + tries + " tries...");
     process.exit();
   } else {
     while (humanGuess !== robitNum) {
@@ -63,6 +63,7 @@ async function newGame() {
             humanGuess +
             "."
         );
+        tries++;
         humanGuess = await ask("Guess again?");
       } else if (humanGuess < robitNum) {
         console.log(
@@ -70,13 +71,17 @@ async function newGame() {
             humanGuess +
             "."
         );
+        tries++;
         humanGuess = await ask("Take another gander at my number?");
       } else {
+        tries++;
         console.log(
           "Congratulations, you have defeated a computer.\nDo you feel proud of yourself??"
         );
         console.log(
-          "Oh man...\n Times are tough out here for a gambling man...\nI bet all my bitcoins that you, a puny human couldn't beat me in a game of guessing numbers,\nbut somehow you did :(\nMy robot friends are bound to make fun of me... \nIt only took you "+ tries + " tries. :'("
+          "Oh man...\n Times are tough out here for a gambling man...\nI bet all my bitcoins that you, a puny human couldn't beat me in a game of guessing numbers,\nbut somehow you did :(\nMy robot friends are bound to make fun of me... \nIt only took you " +
+            tries +
+            " tries. :'("
         );
         process.exit();
       }
